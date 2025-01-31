@@ -2,4 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request, "core/index.html")
+    leagues = request.user.leagues.all()
+    context = {
+        "leagues": leagues,
+    }
+    return render(request, "core/index.html", context)
