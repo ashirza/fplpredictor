@@ -10,7 +10,7 @@
         <tbody>
         {% for league in leagues %}
             <tr>
-                <td>{{ league.name }}</td>
+                <td><a href="{% url 'leagues:detail' league.id %}">{{ league.name }}</a></td>
             </tr>
         {% endfor %}
 
