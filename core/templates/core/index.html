@@ -1,21 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>My leagues</h1>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for league in leagues %}
-            <tr>
-                <td><a href="{% url 'leagues:detail' league.id %}">{{ league.name }}</a></td>
-            </tr>
-        {% endfor %}
+    <div>
+        <h1>Summary</h1>
+        <h4>Current Score: 76</h4>
+        <h6>Last Score: 42</h6>
+    </div>
+    <div>
+        {% if leagues %}
+            {% include "leagues/user_leagues_table.html" with leagues=leagues %}
+        {% else %}
+            <p>you're not in any leagues yet.</p>
+        {% endif %}
+    </div>
 
-        </tbody>
-    </table>
-
-
-{% endblock content %}
+{% endblock %}

@@ -5,13 +5,17 @@
     <table class="table .table-striped">
         <thead>
         <tr>
+            <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Score</th>
         </tr>
         </thead>
         <tbody>
         {% for user in league.users.all %}
             <tr>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ user }}</td>
+                <td>90</td>
             </tr>
         {% endfor %}
         </tbody>

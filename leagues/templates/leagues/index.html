@@ -3,11 +3,7 @@
 {% block content %}
 
     {% if leagues %}
-        <ul>
-            {% for league in leagues %}
-                <li><a href="{% url 'leagues:detail' league.id %}">{{ league.name }}</a></li>
-            {% endfor %}
-        </ul>
+        {% include "leagues/user_leagues_table.html" with leagues=leagues %}
     {% else %}
         <p>you're not in any leagues yet.</p>
     {% endif %}
