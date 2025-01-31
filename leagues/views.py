@@ -10,7 +10,7 @@ class IndexView(generic.ListView):
     context_object_name = "leagues"
 
     def get_queryset(self):
-        return League.objects.all()
+        return League.objects.filter(users__in=[self.request.user])
 
 
 class DetailView(generic.DetailView):
