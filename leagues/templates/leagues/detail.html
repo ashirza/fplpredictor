@@ -2,6 +2,24 @@
 
 {% block content %}
     <h1>{{ league.name }}</h1>
+    <button onclick="copyShareCode('{{ league.join_code }}')" type="button" class="button-primary">Copy Share Code
+    </button>
+    <div style="display: none" id="share-code-alert" class="alert alert-primary" role="alert">Share Code Copied!</div>
+    <script>
+        async function copyShareCode(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                const copyAlert = document.getElementById("share-code-alert");
+                copyAlert.style.display = "";
+
+                setTimeout(() => {
+                    copyAlert.style.display = "none";
+                }, 2000);
+            } catch (err) {
+                console.error("Failed to copy text");
+            }
+        }
+    </script>
     <table class="table .table-striped">
         <thead>
         <tr>
