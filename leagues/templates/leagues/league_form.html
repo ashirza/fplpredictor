@@ -1,0 +1,13 @@
+<html>
+<head></head>
+<body>
+<form action="{% url 'leagues:submit' league.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ league.name }}</h1></legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>
+        
+    </fieldset>
+</form>
+</body>
+</html>

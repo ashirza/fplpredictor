@@ -1,0 +1,15 @@
+{% extends "leagues/base.html" %}
+
+{% block content %}
+
+    {% if leagues %}
+        <ul>
+            {% for league in leagues %}
+                <li><a href="{% url 'leagues:detail' league.id %}">{{ league.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>you're not in any leagues yet.</p>
+    {% endif %}
+
+{% endblock %}

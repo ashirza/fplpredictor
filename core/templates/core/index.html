@@ -1,0 +1,9 @@
+{% block content %}
+    <p>homepage!</p>
+    {% if user.is_authenticated %}
+        <p>nice</p>
+    {% else %}
+        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+    {% endif %}
+
+{% endblock content %}
