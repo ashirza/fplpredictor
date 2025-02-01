@@ -1,0 +1,48 @@
+<form hx-post="{% url 'predict' fixture.id %}" hx-swap="outerHTML"
+    class="d-flex align-items-center gap-2 position-relative">
+    {% csrf_token %}
+    <input type="number" name="home_score" min="0" max="99" value="{{ prediction.home_score }}" class="form-control"
+        style="width: 60px">
+    <span>-</span>
+    <input type="number" name="away_score" min="0" max="99" value="{{ prediction.away_score }}" class="form-control"
+        style="width: 60px">
+    <button type="submit" class="btn btn-primary btn-sm">
+        {% if prediction %}Update{% else %}Predict{% endif %}
+    </button>
+    {% if just_updated %}
+    <div class="position-absolute start-50 translate-middle-x" style="top: -30px; z-index: 1000;">
+        <div class="fade-out badge bg-success">
+            Prediction saved
+        </div>
+    </div>
+    {% endif %}
+</form>
+
+<style>
+    .htmx-indicator.badge {
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .htmx-indicator.badge.htmx-added {
+        animation: fadeInOut 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+        }
+
+        10% {
+            opacity: 1;
+        }
+
+        70% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+</style>

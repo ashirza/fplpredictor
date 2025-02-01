@@ -4,8 +4,8 @@ from .models import League
 
 
 class LeagueAdmin(admin.ModelAdmin):
-    fields = ["name"]
-    list_display = ["name"]
+    fields = ("name",)
+    list_display = ("name", "join_code")
 
 
-admin.site.register(League)
+admin.site.register(League, LeagueAdmin)

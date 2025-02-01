@@ -11,10 +11,23 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env_path = BASE_DIR / ".env"
+print(f"Looking for .env file at: {env_path}")
+print(f"File exists: {env_path.exists()}")
 
+# Add this debug code
+if env_path.exists():
+    print("File contents:")
+    with open(env_path) as f:
+        print(f.read())
+
+load_dotenv(dotenv_path=env_path, override=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -40,6 +53,7 @@ INSTALLED_APPS = [
     "leagues.apps.LeaguesConfig",
     "accounts.apps.AccountsConfig",
     "core.apps.CoreConfig",
+    "django_crontab",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +141,19 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/accounts/login/"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
+}
+
+FPL_API_KEY = os.getenv("FPL_API_KEY")
+CRONJOBS = [
+    (
+        "*/15 * * * *",
+        "django.core.management.call_command",
+        ["sync_fixtures"],
+    ),  # Runs every 15 minutes
+]

@@ -7,5 +7,13 @@
     {% else %}
         <p>you're not in any leagues yet.</p>
     {% endif %}
+    <div>
+        <form action="/leagues/join" method="post">
+            {% csrf_token %}
+            <label for="join_code">Join Code</label>
+            <input id="join_code" type="text" name="join_code">
+            <input type="submit" value="Join">
+        </form>
+    </div>
 
 {% endblock %}
